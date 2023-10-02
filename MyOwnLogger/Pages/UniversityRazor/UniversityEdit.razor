@@ -1,0 +1,7 @@
+﻿@page "/universityedit/{id:int}"
+
+<EditForm Model="universityDTO" OnSubmit="HandleSubmit">
+    <label for="Name">Name</label>
+    <InputText id="Name" @bind-Value="universityDTO.Name" class="form-control"></InputText>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>

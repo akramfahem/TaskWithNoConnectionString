@@ -1,0 +1,26 @@
+﻿@page "/university/{id:int}"
+
+<div class="university-card card">
+    <div class="card-body">
+        <h5 class="card-title">@university.Name</h5>
+        @if (university.Colleges is not null)
+        {
+            @foreach (var college in university.Colleges)
+            {
+                <div class="college-cards">
+                    <div class="college-card card">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">@college.Name</h6>
+                            <div class="card-footer">
+                                <a href ="@($"/collegeedit/{college.Id}")"class="btn btn-secondary">Edit</a>
+                                <a href="@($"/collegedetails/{college.Id}")" class="btn btn-primary">Details</a>
+                                <a class="btn btn-danger" @onclick="() => DeleteCollege(college.Id)">Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+<a href="@($"/collegecreate/{university.Id}")" class="btn btn-primary">Create College</a>

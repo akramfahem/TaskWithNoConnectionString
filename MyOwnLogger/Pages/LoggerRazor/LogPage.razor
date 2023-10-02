@@ -1,0 +1,75 @@
+﻿@page "/log"
+
+<label for="logger" class="col-sm-2 col-form-label">LogType</label>
+<div class="col-sm-10">
+    <label for="FirstName">Choose User:</label>
+
+<select class="form-select" @onchange="UpdateUser" value="@user">
+    <option disabled selected value> -- select an option -- </option>
+    @foreach (string user in users)
+    {
+        <option value="@user">@user</option>
+    }
+</select>
+    <select class="form-select" @onchange="UpdateFilteredDataAsync" value="@logType">
+        @foreach (var Type in Enum.GetValues(typeof(SharedLibrary.LogType)))
+        {
+            <option value="@Type">@Type</option>
+        }
+    </select>
+    <div class="row">
+        <div class="col-sm-6">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input id="startDate" type="date" class="form-control" @bind="selectedStartDate" min="@MinimumDate.ToString("yyyy-MM-dd")" max="@MaxDate.ToString("yyyy-MM-dd")" />
+        </div>
+        <div class="col-sm-6">
+            <label for="endDate" class="form-label">End Date</label>
+            <input id="endDate" type="date" class="form-control" @bind="selectedEndDate" min="@MinimumDate.ToString("yyyy-MM-dd")" max="@MaxDate.ToString("yyyy-MM-dd")" />
+        </div>
+    </div>
+    <button class="btn btn-primary mt-3" @onclick="GetData">Show Logs</button>
+    <button class="btn btn-primary mt-3" @onclick="ResetFilteration">ResetFilteration</button>
+
+    <div class="footer d-flex justify-content-center mt-3">
+        <button class="arrow-button btn btn-secondary" @onclick="PreviousPage"><span>&lt;</span>  Previous  </button>
+        <span class="mx-2">
+            <strong>Page:</strong> <span class="text-primary">@CurrentPage</span>
+        </span>
+        <button class="arrow-button btn btn-secondary" @onclick="NextPage">Next <span>&gt;</span></button>
+    </div>
+</div>
+
+<h3>Logger</h3>
+
+<div class="form-group row">
+    @if (ShowedlogMessages.Any())
+    {
+        @foreach (List<LogMessage> logmessages in ShowedlogMessages)
+            {
+            @foreach (LogMessage logMessage in logmessages)
+                {
+                <div class="col-md-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title text-primary">@logMessage.LogType</h5>
+                            <p class="card-text text-info">@logMessage.CreatedAt</p>
+                            <p class="card-text text-dark">@logMessage.Message</p>
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+    }
+    else if (loadingLogs)
+    {
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p class="col-md-12 text-center">No logs available.</p>
+    }
+</div>

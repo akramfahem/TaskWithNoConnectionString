@@ -1,0 +1,16 @@
+﻿@page "/doctoredit/{id:int}"
+
+<EditForm Model="doctorDTO" OnSubmit="HandleSubmit">
+    <label for="FirstName">FirstName</label>
+    <InputText id="FirstName" @bind-Value="doctorDTO.FName" class="form-control"></InputText>
+    <label for="LastName">LastName</label>
+    <InputText id="LastName" @bind-Value="doctorDTO.LName" class="form-control"></InputText>
+    <label for="Age">Age</label>
+    <InputNumber id="Age" @bind-Value="doctorDTO.Age" class="form-control"></InputNumber>
+    <label for="Email">Email</label>
+    <InputText id="Email" @bind-Value="doctorDTO.Email" class="form-control"></InputText>
+    <label for="MobileNumber">Phone Number</label>
+    <InputText id="MobileNumber" @bind-Value="doctorDTO.PhoneNumber" class="form-control"></InputText>
+    <button type="submit" class="btn btn-primary">Edit</button>
+    
+</EditForm>

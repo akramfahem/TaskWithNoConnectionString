@@ -1,0 +1,34 @@
+﻿@page "/doctordetails/{id:int}"
+@if (doctor is not null)
+{<h1>@doctor.FName @doctor.LName</h1>}
+@if (doctor.Subjects is not null)
+{
+    <div class="container">
+        <h1 class="text-center mb-5">Subjects Teached By Him</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>TotalGrade</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Subject in doctor.Subjects)
+                    {
+                        <tr>
+                            <td>@Subject.Id</td>
+                            <td>@Subject.Name</td>
+                            <td>@Subject.TotalGrade</td>
+                            <td><a href=@($"/subjectedit/{Subject.Id}") class="btn btn-dark">Edit</a></td>
+                            <td><a href=@($"/subjectdetails/{Subject.Id}") class="btn btn-dark">Details</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

@@ -1,0 +1,15 @@
+﻿@page "/enrollmentcreate/{StudentId:int}"
+
+<h1>Enroll in Course</h1>
+<EditForm Model="enrollment"OnSubmit="HandleSubmit">
+    <InputSelect @bind-Value="enrollment.SubjectId" class="form-control">
+        <option disabled selected value> -- select an option -- </option>
+        @foreach (var subject in subjects)
+        {
+            <option value="@subject.Id">@subject.Name</option>
+        }
+    </InputSelect>
+    <hr />
+    <br/>
+    <button type="submit" class="mt-3 btn btn-primary">Enroll</button>
+</EditForm>

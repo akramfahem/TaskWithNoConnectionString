@@ -1,0 +1,15 @@
+﻿@page "/university"
+@foreach (var university in Universities)
+{
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">@university.Name</h5>
+            <div class="card-footer">
+                <a href="@($"/university/{university.Id}")" class="btn btn-primary">Details</a>
+                <a href="@($"/universityedit/{university.Id}")" class="btn btn-secondary">Edit</a>
+                <a class="btn btn-danger" @onclick="() => DeleteUniversity(university.Id)">Delete</a>
+            </div>
+        </div>
+    </div>
+}
+<a href="@($"/universitycreate")" class="mt-3 btn btn-primary">Create University</a>

@@ -1,0 +1,121 @@
+﻿@page "/collegedetails/{id:int}"
+
+<h1>@college.Name</h1>
+
+@if (college.Students is not null)
+{
+    <div class="container">
+        <h1 class="text-center mb-5">Student List</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>PhoneNumber</th>
+                        <th>Level</th>
+                        <th>Semester</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var student in college.Students)
+                    {
+                        <tr>
+                            <td>@student.Id</td>
+                            <td>@student.FName @student.LName</td>
+                            <td>@student.Age</td>
+                            <td>@student.Email</td>
+                            <td>@student.PhoneNumber</td>
+                            <td>@student.level</td>
+                            <td>@student.Semester</td>
+                            <td><a href="@($"/studentedit/{student.Id}")" class="btn btn-dark">Edit</a></td>
+                            <td><a href="@($"/studentdetails/{student.Id}")" class="btn btn-dark">Details</a></td>
+                            <td><a @onclick="() => DeleteStudent(student.Id)" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+<a href="@($"/studentcreate/{college.Id}")" class="mt-3 btn btn-primary">Create Student</a>
+
+@if (college.Doctors is not null)
+{
+    <div class="container">
+        <h1 class="text-center mb-5">Doctors List</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>PhoneNumber</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var doctor in college.Doctors)
+                    {
+                        <tr>
+                            <td>@doctor.Id</td>
+                            <td>@doctor.FName @doctor.LName</td>
+                            <td>@doctor.Age</td>
+                            <td>@doctor.Email</td>
+                            <td>@doctor.PhoneNumber</td>
+                            <td><a href=@($"/doctoredit/{doctor.Id}") class="btn btn-dark">Edit</a></td>
+                            <td><a href=@($"/doctordetails/{doctor.Id}") class="btn btn-dark">Details</a></td>
+                            <td><a @onclick="() => DeleteDoctor(doctor.Id)" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+<a href="@($"/doctorcreate/{college.Id}")" class="mt-3 btn btn-primary">Create Doctor</a>
+@if (college.Subjects is not null)
+{
+    <div class="container">
+        <h1 class="text-center mb-5">Subjects List</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Taught By</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Subject in college.Subjects)
+                    {
+                        <tr>
+                            <td>@Subject.Id</td>
+                            <td>@Subject.Name</td>
+                            <td>@Subject.Doctor.FName @Subject.Doctor.LName</td>
+                            <td><a href=@($"/subjectedit/{Subject.Id}") class="btn btn-dark">Edit</a></td>
+                            <td><a href=@($"/subjectdetails/{Subject.Id}") class="btn btn-dark">Details</a></td>
+                            <td><a @onclick="() => DeleteSubject(Subject.Id)" class="btn btn-danger">Delete</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
+<a href="@($"/subjectcreate/{college.Id}")" class="mt-3 btn btn-primary">Create Subject</a>
+

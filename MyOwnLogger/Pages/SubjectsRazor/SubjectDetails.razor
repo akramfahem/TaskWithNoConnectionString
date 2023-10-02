@@ -1,0 +1,43 @@
+﻿@page "/subjectdetails/{id:int}"
+<h1>@subject.Name</h1>
+@if (subject.Doctor is not null)
+{<h2>Taught By @subject.Doctor.FName @subject.Doctor.LName</h2>}
+@if (subject.Students is not null)
+{
+    <div class="container">
+        <h1 class="text-center mb-5">Student List</h1>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Email</th>
+                        <th>PhoneNumber</th>
+                        <th>Level</th>
+                        <th>Semester</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var student in subject.Students)
+                    {
+                        <tr>
+                            <td>@student.Id</td>
+                            <td>@student.FName @student.LName</td>
+                            <td>@student.Age</td>
+                            <td>@student.Email</td>
+                            <td>@student.PhoneNumber</td>
+                            <td>@student.level</td>
+                            <td>@student.Semester</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
